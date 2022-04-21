@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Categories</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <a class="navbar-brand" href="/">Home</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/books">Books</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/categories">Category</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+<ul class="list-group">
+    <li th:each="cat:${categories}" th:text="${cat?.toString()}" th:value="${cat}"  class="list-group-item">[cat].[name]</li>
+</ul>
+</div>
+</body>
+</html>

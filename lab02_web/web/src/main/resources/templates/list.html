@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<form>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <a class="navbar-brand" href="/">Home</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/books">Books</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/categories">Category</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container" >
+        <label for="name">Search</label>
+        <input  class="form-control" id="name" placeholder="Search" >
+
+
+        <label for="category">Category</label>
+        <select class="form-control" id="category">
+            <option value="">Categories</option>
+            <option th:each="cat: ${categories}" th:value="${cat}" th:text="${cat.name()}">[cat]</option>
+        </select>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <br>
+    <div class="container">
+        <a href="/books/add" class="btn btn-primary" >
+            Add New Book
+        </a>
+    </div>
+    <br>
+    <div class="container">
+        <table class="table text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Author's name</th>
+                <th scope="col">Author's surname</th>
+                <th scope="col">Category</th>
+                <th scope="col">Available copies</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="item" th:each="book: ${books}">
+                <td th:text="${book.name}">[books.name]</td>
+                <td th:text="${book.author.name}">[books.author.name]</td>
+                <td th:text="${book.author.surname}">[books.author.surname]</td>
+                <td th:text="${book.getCategory()}" th:value="${book.getCategory()}">[books.category]</td>
+                <td th:text="${book.availableCopies}">[books.availableCopies]</td>
+                <td>
+                    <a th:href="@{'/books/{id}/delete' (id=${book.id})}" class="btn btn-primary" th:method="POST">Delete</a>
+                </td>
+                <td>
+                    <a th:href="@{'/books/{id}/edit' (id=${book.id})}" class="btn btn-primary" >Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{'/books/{id}/taken' (id=${book.id})}" class="btn btn-primary" >Mark as taken</a>
+                </td>
+
+            </tr>
+            <tbody>
+        </table>
+    </div>
+</form>
+</body>
+</html>
